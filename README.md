@@ -12,5 +12,3 @@ Este trabalho visa criar um site/sistema web para gerenciamento de qualidade de 
  - Fazer upload de amostras de materiais via software de terceiros;
  - Gerar orcamento de materiais;
 
-
-Created by Welington Gulinelli and Eduardo Almeida.

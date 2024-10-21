@@ -66,3 +66,16 @@ function deslogar() {
     localStorage.removeItem('usuarioLogado');
     navigateTo('../html/logar.html');
 }
+
+
+document.getElementById("contact-btn").addEventListener("click", function(event) {
+    event.preventDefault(); // Previne o comportamento padrão do link
+    const contactsList = document.getElementById("contacts-list");
+    
+    // Alterna a visibilidade da lista de contatos
+    if (contactsList.style.display === "none") {
+        contactsList.style.display = "block";
+    } else {
+        contactsList.style.display = "none";
+    }
+});

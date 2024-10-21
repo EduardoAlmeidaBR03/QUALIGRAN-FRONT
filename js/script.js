@@ -1,6 +1,9 @@
 // Simulação de usuários cadastrados
 let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
+//Criei para poder apagar os usuarios ja cadastrados(teste)
+//localStorage.removeItem('usuarios');
+
 // Função para redirecionar sem abrir nova guia
 function navigateTo(url) {
     window.location.href = url; // Muda a URL da página atual
@@ -26,7 +29,7 @@ if (document.getElementById('formCadastrar')) {
         localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
         alert('Usuário cadastrado com sucesso!');
-        navigateTo('logar.html'); // Redireciona para a página de login
+        navigateTo('../html/logar.html'); // Redireciona para a página de login
     });
 }
 
@@ -41,7 +44,7 @@ if (document.getElementById('formLogar')) {
 
         if (usuario) {
             localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
-            navigateTo('logado.html'); // Redireciona para a página logado
+            navigateTo('../html/logado.html'); // Redireciona para a página logado
         } else {
             alert('Email ou senha incorretos.');
         }
@@ -54,12 +57,12 @@ if (window.location.pathname.includes('logado.html')) {
     if (usuarioLogado) {
         document.getElementById('userWelcome').innerText = `Olá, ${usuarioLogado.nome}!`;
     } else {
-        navigateTo('logar.html'); // Redireciona para login se não estiver logado
+        navigateTo('../html/logar.html'); // Redireciona para login se não estiver logado
     }
 }
 
 // Função para deslogar
 function deslogar() {
     localStorage.removeItem('usuarioLogado');
-    navigateTo('logar.html');
+    navigateTo('../html/logar.html');
 }

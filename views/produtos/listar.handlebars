@@ -1,4 +1,4 @@
-<h1 class="text-center my-3">Lista de Produtos</h1>
+<h1 class="text-center my-3">Lista de Chapas</h1>
 <div class="row">
   <div class="col-12">
     <table class="table">
@@ -6,9 +6,9 @@
         <tr>
           <th>Imagem</th>
           <th>Nome</th>
-          <th>Descrição</th>
+          <th>Qualidade</th>
           <th>Preço</th>
-          <th>Código do Produto</th>
+          <th>Código da chapa</th>
           <th>Ação</th>
         </tr>
       </thead>
@@ -16,26 +16,33 @@
         {{#each chapa}}
         <tr>
           <td>
-            <img src="{{this.link}}" alt="Imagem do Produto" width="150" height="150" />
+            <img src="{{this.link}}" alt="Imagem da chapa" width="150" height="150" />
           </td>
           <td>
             <strong>{{this.nome}}</strong>
           </td>
           <td>
-            {{this.descricao}}
+            {{this.qualidade}}  <!-- Removido o símbolo de dinheiro -->
           </td>
           <td>
             R${{this.preco}}
           </td>
           <td>
-            {{this.id_produto}}
+            {{this.id_chapa}}
           </td>
           <td>
-            <form action="/carrinho/Adicionar" method="POST">
-              <input type="hidden" name="id_produto" value="{{this.id_produto}}" />
+            <form action="/carrinho/Adicionar" method="POST" style="display:inline;">
+              <input type="hidden" name="id_produto" value="{{this.id_chapa}}" />
               <button type="submit" class="btn btn-primary">
-                <img src="https://pt.seaicons.com/wp-content/uploads/2015/06/Shopping-basket-add-icon.png" width="20" height="20" alt="Adicionar ao Carrinho" />
-                Adicionar ao Carrinho
+                <i class="bi bi-cart"></i> 
+              </button>
+            </form>
+            <a href="/chapa/alterar/{{this.id_chapa}}" class="btn btn-warning" title="Alterar">
+              <i class="bi bi-pencil"></i> <!-- Ícone de editar -->
+            </a>
+            <form action="/chapa/excluir/{{this.id_chapa}}" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir esta chapa?');">
+                <i class="bi bi-trash"></i> <!-- Ícone de excluir -->
               </button>
             </form>
           </td>

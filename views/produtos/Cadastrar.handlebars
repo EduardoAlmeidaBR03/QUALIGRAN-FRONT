@@ -15,19 +15,6 @@
       />
     </div>
 
-    <!-- Campo Quantidade da Chapa -->
-    <div class="col-12">
-      <label class="form-label" for="quantidade">Quantidade da Chapa:</label>
-      <input
-        class="form-control"
-        type="number"
-        name="quantidade"
-        id="quantidade"
-        placeholder="Digite a quantidade"
-        required
-      />
-    </div>
-
     <!-- Campo Link da Imagem da Chapa -->
     <div class="col-12">
       <label class="form-label" for="link">Link da Imagem da Chapa:</label>
@@ -44,14 +31,23 @@
     <!-- Campo Qualidade da Chapa -->
     <div class="col-12">
       <label class="form-label" for="qualidade">Qualidade da Chapa:</label>
-      <input
-        class="form-control"
-        type="text"
-        name="qualidade"
-        id="qualidade"
-        placeholder="Digite a qualidade da chapa"
-        required
-      />
+      <div class="input-group">
+        <select class="form-control" name="qualidade" id="qualidade" required disabled>
+          <option value="" disabled selected>Selecione a qualidade da chapa</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+        </select>
+        <button
+          type="button"
+          class="btn"
+          id="btn-random"
+          style="background-color: #add8e6;"
+          disabled
+        >
+          <i class="bi bi-stars"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Campo Preço da Chapa -->
@@ -60,7 +56,7 @@
       <input
         class="form-control"
         type="number"
-        step="0.01"
+        step="1"
         name="preco"
         id="preco"
         placeholder="Digite o preço da chapa"
@@ -70,7 +66,35 @@
 
     <!-- Botão de Cadastro -->
     <div class="col-12">
-      <input class="btn btn-primary my-3" type="submit" value="Cadastrar Chapa" />
+      <input
+        class="btn btn-primary my-3"
+        type="submit"
+        value="Cadastrar Chapa"
+      />
     </div>
   </div>
 </form>
+
+<script>
+  // Função para habilitar o campo qualidade quando o link for preenchido
+  const linkInput = document.getElementById('link');
+  const qualidadeSelect = document.getElementById('qualidade');
+  const randomButton = document.getElementById('btn-random');
+
+  linkInput.addEventListener('input', function () {
+    if (linkInput.value !== '') {
+      qualidadeSelect.disabled = false;
+      randomButton.disabled = false;
+    } else {
+      qualidadeSelect.disabled = true;
+      randomButton.disabled = true;
+    }
+  });
+
+  // Função para selecionar uma opção aleatória
+  document.getElementById('btn-random').addEventListener('click', function () {
+    const options = ['A', 'B', 'C'];
+    const randomOption = options[Math.floor(Math.random() * options.length)];
+    qualidadeSelect.value = randomOption; // Define o valor aleatório no select
+  });
+</script>

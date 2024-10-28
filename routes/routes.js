@@ -30,4 +30,6 @@ router.post("/chapas/Cadastrar",Services.ProdutoCreate);
 
 router.get("/chapas/listar",Services.ProdutoListar);
 
+router.post("/chapa/excluir/:id",Services.ProdutoDelete);
+
 module.exports=router;

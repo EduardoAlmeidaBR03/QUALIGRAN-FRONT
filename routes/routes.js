@@ -10,9 +10,10 @@ router.get("/",(req, res) =>{
 router.get("/", Services.ProdutoListar);
 
 router.post("/login",Services.UsuarioLogin);
-router.get("/login",(req, res) =>{
- res.render("usuarios/login");
-})
+router.get('/login', (req, res) => {
+    res.render('usuarios/login', { isLogin: true });
+  });
+  
 
 router.get("/usuarios/Cadastrar",(req, res) =>{
  res.render("usuarios/Cadastrar");

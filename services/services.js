@@ -77,4 +77,48 @@ module.exports = class Services {
          res.render("mensagem", { mensagem });
       }
    }
+
+   //COOKIES
+   static async CarrinhoAdicionar(req, res){
+      const Item = {
+         id: req.params.id,
+         nome: req.params.nome
+      };
+      //Verificando se já existe cookie para o carrinho
+      if (req.cookies.carrinho){
+         const carrinho = JSON.parse(req.cookies.carrinho);
+         carrinho.push(Item);
+         res.cookie('carrinho', JSON.stringify(carrinho), { maxAge: 9000000, httpOnly: true});
+
+      }else{
+         const carrinho = [Item];
+         res.cookie('carrinho', JSON.stringify(carrinho), { maxAge: 9000000, httpOnly: true});
+      }
+      res.send('Item adicionado ao carrinho')
+   }
+
+   static async CarrinhoRemoverItem(req, res){
+      const itemDeletar = req.params.item;
+      if (req.cookies.carrinho){
+         let carrinho = JSON.parse(req.cookies.carrinho);
+
+         carrinho = carrinho.filter(item => item.id !== itemDeletar);
+
+         res.cookie('carrinho', JSON.stringify(carrinho), {maxAge: 9000000, httpOnly: true});
+
+         res.send('Item removido do carrinho');
+      }else{
+         res.send('Carrinho vazinho');
+      }
+   }
+
+   static async CarrinhoListar(req,res){
+      if(req.cookies.carrinho){
+         const carrinho = JSON.parse(req.cookies.carrinho);
+         res.render('carrinho/Listar', {carrinho});
+      }else{
+         res.send('Carrinho vazio');
+      }
+   }
+
 }

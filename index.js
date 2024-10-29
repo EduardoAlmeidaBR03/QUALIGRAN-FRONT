@@ -4,6 +4,7 @@ const hand = require("express-handlebars");
 const Services = require("./services/services");
 const routes = require("./routes/routes");
 const path = require("path");
+const cookieParser = require('cookie-parser');
 
 // Configurar Handlebars como o mecanismo de visualização
 app.engine("handlebars", hand.engine());
@@ -13,7 +14,7 @@ app.set("views", path.join(__dirname, "views"));
 // Configurar a pasta 'public' para arquivos estáticos (CSS, imagens, etc.)
 // app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static("public"));
-
+app.use(cookieParser());
 
 // Configurar middlewares para o parsing de dados
 app.use(express.urlencoded({ extended: true }));

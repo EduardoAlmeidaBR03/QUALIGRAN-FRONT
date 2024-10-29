@@ -31,12 +31,9 @@
             {{this.id_chapa}}
           </td>
           <td>
-            <form action="/carrinho/Adicionar" method="POST" style="display:inline;">
-              <input type="hidden" name="id_produto" value="{{this.id_chapa}}" />
-              <button type="submit" class="btn btn-primary">
-                <i class="bi bi-cart"></i> 
-              </button>
-            </form>
+            <a href="/carrinho/Adicionar/{{this.id_chapa}}/{{this.nome}}" class="btn btn-primary">
+              <i class="bi bi-cart"></i> 
+            </a>
             <a href="/chapa/alterar/{{this.id_chapa}}" class="btn btn-warning" title="Alterar">
               <i class="bi bi-pencil"></i> <!-- Ícone de editar -->
             </a>

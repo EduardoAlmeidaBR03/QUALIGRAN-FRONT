@@ -1,15 +1,20 @@
 body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../img/calacata.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #333;
+}
   
   .limiter {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #1d1d20;
+    /* background-color: #1d1d20; */
   }
   
   .container-login100 {
@@ -18,10 +23,6 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('public/css/calacata.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
   }
   
   .wrap-login100 {

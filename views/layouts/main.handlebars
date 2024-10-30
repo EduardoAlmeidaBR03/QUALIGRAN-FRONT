@@ -21,10 +21,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
     />
 
-    {{! ARQUIVOS LOCAL }}
-    {{!-- <link rel="stylesheet" href="css/styles.css" /> --}}
     <title>Sistema de Controle de Chapas</title>
   </head>
+
   <body id="body-mobile">
     {{!-- Verificação para esconder a navbar se estiver na página de login --}}
     {{#unless isLogin}}
@@ -35,6 +34,9 @@
           <li class="nav-item"></li>
         </ul>
       </div>
+      <a href="/carrinho/listar" class="btn btn-secondary">
+        <i class="bi bi-cart"></i>
+      </a>
     </nav>
     {{/unless}}
 
@@ -48,3 +50,4 @@
     </div>
   </body>
 </html>
+

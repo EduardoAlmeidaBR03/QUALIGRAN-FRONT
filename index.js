@@ -7,12 +7,17 @@ const path = require("path");
 const cookieParser = require('cookie-parser');
 
 // Configurar Handlebars como o mecanismo de visualização
-app.engine("handlebars", hand.engine());
+app.engine("handlebars", hand.engine({
+    helpers: {
+        encodeURIComponent: function (url) {
+            return encodeURIComponent(url);
+        }
+    }
+}));
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
 
 // Configurar a pasta 'public' para arquivos estáticos (CSS, imagens, etc.)
-// app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static("public"));
 app.use(cookieParser());
 

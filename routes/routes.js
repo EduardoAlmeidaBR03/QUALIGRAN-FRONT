@@ -35,8 +35,8 @@ router.post("/chapa/excluir/:id",Services.ProdutoDelete);
 
 
 
-router.get('/carrinho/Adicionar/:id/:nome', Services.CarrinhoAdicionar);
+router.get('/carrinho/Adicionar/:id_chapa/:nome/:preco/:link', Services.CarrinhoAdicionar);
 router.get('/carrinho/listar', Services.CarrinhoListar);
-router.get('/carrinho/remover/:item', Services.CarrinhoRemoverItem);
+router.get('/carrinho/remover/:id_chapa', Services.CarrinhoRemoverItem);
 
 module.exports=router;

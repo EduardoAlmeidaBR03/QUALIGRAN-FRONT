@@ -1,25 +1,30 @@
 <h1 class="text-center my-3">Lista de Produtos do Carrinho</h1>
-<center><table class="table">
-<div class="row">
-<div class="col-12">
-<thead>
-</thead>
-<tbody>
-<tr >
- {{#each carrinho}}
-<br>
- Código Produto:<strong> {{this.id_chapa}}</strong> - <strong>{{this.nome}}</strong>
-<a href="/carrinho/remover/{{this.id}}"><img 
-src="https://lh3.googleusercontent.com/pw/AP1GczNIro9w60S3oGEEqRPiuavtt
-tybD4sU1mijgmDsZVG25i8vCtdlm78mdg1OfGhE8Kl9WhEsn7w0KwUuMGybz
-uGBrZhZasbMNsZ9UcbIUa8a-gEtBmnLeY6gW94zhcs9MumXqERWiU9wjpXGM2XYtvU=w360-h360-s-no-gm?authuser=0"alt="remover do carrinho" width=50 height=50
-alt="mostrar imagem" title="Clique aqui para remover do carrinho"/></a>
-</th>
+<center>
+  <table class="table">
+    <div class="row">
+      <div class="col-12">
+        <thead>
+        </thead>
+        <tbody>
+          {{#each carrinho}}
+            <tr>
+              <td>
+                <img src="{{this.link}}" alt="Imagem do produto" width="50" height="50" class="me-2"/>
+                Código Produto: <strong>{{this.id_chapa}}</strong> - 
+                <strong>{{this.nome}}</strong> - 
+                Preço: <strong>R$ {{this.preco}}</strong>
+              </td>
+              <td>
+                <a href="/carrinho/remover/{{this.id_chapa}}" title="Clique aqui para remover do carrinho">
+                  <i class="bi bi-cart-x"></i>
+                </a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </div>
+    </div>
+  </table>
 
- {{/each}}
-</tr>
-
-</tbody>
-</div>
-</div>
-</table></center>
+  <h3 class="text-center my-3">Total: R$ {{total}}</h3>
+</center>

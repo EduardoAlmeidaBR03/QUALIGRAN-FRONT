@@ -30,14 +30,15 @@
     <nav class="navbar text-bg-dark">
       <div class="container">
         <span class="navbar-brand text-white">Sistema de Controle de Chapas</span>
-        <ul class="navbar nav">
+        <ul class="navbar nav me-auto">
           <li class="nav-item"></li>
         </ul>
+        <a href="/carrinho/listar" class="btn btn-secondary">
+          <i class="bi bi-cart"></i>
+        </a>
       </div>
-      <a href="/carrinho/listar" class="btn btn-secondary">
-        <i class="bi bi-cart"></i>
-      </a>
     </nav>
+
     {{/unless}}
 
     {{!-- Condicional para adicionar a classe "container" apenas se não for a página de login --}}

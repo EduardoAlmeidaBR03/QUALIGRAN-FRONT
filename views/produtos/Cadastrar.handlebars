@@ -1,79 +1,93 @@
-<h1 class="text-center my-3">Sistema de Cadastro de Chapas</h1>
-<form action="/chapas/Cadastrar" method="post">
-  <div class="row w-50 d-block m-auto g-3">
-    
-    <!-- Campo Nome da Chapa -->
-    <div class="col-12">
-      <label class="form-label" for="nome">Nome da Chapa:</label>
-      <input
-        class="form-control"
-        type="text"
-        name="nome"
-        id="nome"
-        placeholder="Digite o nome da chapa"
-        required
-      />
-    </div>
+<head>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
 
-    <!-- Campo Link da Imagem da Chapa -->
-    <div class="col-12">
-      <label class="form-label" for="link">Link da Imagem da Chapa:</label>
-      <input
-        class="form-control"
-        type="url"
-        name="link"
-        id="link"
-        placeholder="Digite o link da imagem"
-        required
-      />
-    </div>
+<body>
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">  
+      <h1 class="text-center my-3">Cadastro de Chapas</h1>
+      <form action="/chapas/Cadastrar" method="post">
+        <div class="row d-block m-auto g-3">
+          
+          <!-- Campo Nome da Chapa -->
+          <div class="col-12">
+            <label class="form-label" for="nome">Nome da Chapa:</label>
+            <input
+              class="form-control"
+              type="text"
+              name="nome"
+              id="nome"
+              placeholder="Digite o nome da chapa"
+              required
+            />
+          </div>
 
-    <!-- Campo Qualidade da Chapa -->
-    <div class="col-12">
-      <label class="form-label" for="qualidade">Qualidade da Chapa:</label>
-      <div class="input-group">
-        <select class="form-control" name="qualidade" id="qualidade" required disabled>
-          <option value="" disabled selected>Selecione a qualidade da chapa</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-        </select>
-        <button
-          type="button"
-          class="btn"
-          id="btn-random"
-          style="background-color: #add8e6;"
-          disabled
-        >
-          <i class="bi bi-stars"></i>
-        </button>
-      </div>
-    </div>
+          <!-- Campo Link da Imagem da Chapa -->
+          <div class="col-12">
+            <label class="form-label" for="link">Link da Imagem da Chapa:</label>
+            <input
+              class="form-control"
+              type="url"
+              name="link"
+              id="link"
+              placeholder="Digite o link da imagem"
+              required
+            />
+          </div>
 
-    <!-- Campo Preço da Chapa -->
-    <div class="col-12">
-      <label class="form-label" for="preco">Preço da Chapa:</label>
-      <input
-        class="form-control"
-        type="number"
-        step="1"
-        name="preco"
-        id="preco"
-        placeholder="Digite o preço da chapa"
-        required
-      />
-    </div>
+          <!-- Campo Qualidade da Chapa -->
+          <div class="col-12">
+            <label class="form-label" for="qualidade">Qualidade da Chapa:</label>
+            <div class="input-group">
+              <select class="form-control" name="qualidade" id="qualidade" required disabled>
+                <option value="" disabled selected>Selecione a qualidade da chapa</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+              </select>
+              <button
+                type="button"
+                class="btn"
+                id="btn-random"
+                style="background-color: #add8e6;"
+                disabled
+              >
+                <i class="bi bi-stars"></i>
+              </button>
+            </div>
+          </div>
 
-    <!-- Botão de Cadastro -->
-    <div class="col-12">
-      <input
-        class="btn btn-primary my-3"
-        type="submit"
-        value="Cadastrar Chapa"
-      />
+          <!-- Campo Preço da Chapa -->
+          <div class="col-12">
+            <label class="form-label" for="preco">Preço da Chapa:</label>
+            <input
+              class="form-control"
+              type="number"
+              step="1"
+              name="preco"
+              id="preco"
+              placeholder="Digite o preço da chapa"
+              required
+            />
+          </div>
+
+          <!-- Botão de Cadastro -->
+          <div class="col-12">
+            <input
+              class="btn btn-primary my-3 w-100"
+              type="submit"
+              value="Cadastrar Chapa"
+            />
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-</form>
+</div>
+
+</body>
+
 
 <script>
   // Função para habilitar o campo qualidade quando o link for preenchido

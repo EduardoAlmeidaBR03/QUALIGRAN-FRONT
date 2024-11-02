@@ -12,6 +12,14 @@ body {
     font-size: 32px;
   }
 
+  .container-login100 {
+    width: 100%;
+    min-height: 83vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .container-botoes {
     background-color: #f8f9fa; /* Cor de fundo leve */
     border: 2px solid #000000; /* Cor da borda combinando com os botões */

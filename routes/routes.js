@@ -25,8 +25,8 @@ router.post("/usuarios/Cadastrar",Services.UsuarioCreate);
 /////////////////PRODUTO
 
 router.get("/chapas/Cadastrar",(req, res) =>{
- res.render("produtos/Cadastrar");
-})
+ res.render("produtos/Cadastrar", { isInativa: true });
+});
 router.post("/chapas/Cadastrar",Services.ProdutoCreate);
 
 router.get("/chapas/listar",Services.ProdutoListar);

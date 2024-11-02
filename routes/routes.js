@@ -11,13 +11,13 @@ router.get("/", Services.ProdutoListar);
 
 router.post("/login",Services.UsuarioLogin);
 router.get('/login', (req, res) => {
-    res.render('usuarios/login', { isLogin: true });
+    res.render('usuarios/login', { isInativa: true });
   });
   
 
-router.get("/usuarios/Cadastrar",(req, res) =>{
- res.render("usuarios/Cadastrar");
-})
+router.get("/usuarios/Cadastrar",(req, res) => {
+    res.render("usuarios/Cadastrar", { isInativa: true});
+  });
 
 router.post("/usuarios/Cadastrar",Services.UsuarioCreate);
 

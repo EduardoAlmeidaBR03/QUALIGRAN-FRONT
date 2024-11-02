@@ -26,7 +26,7 @@
 
   <body id="body-mobile">
     {{!-- Verificação para esconder a navbar se estiver na página de login --}}
-    {{#unless isLogin}}
+    {{#unless isInativa}}
     <nav class="navbar text-bg-dark">
       <div class="container">
         <span class="navbar-brand text-white">Sistema de Controle de Chapas</span>
@@ -41,7 +41,7 @@
     {{/unless}}
 
     {{!-- Condicional para adicionar a classe "container" apenas se não for a página de login --}}
-    {{#unless isLogin}}
+    {{#unless isInativa}}
     <div class="container">
     {{else}}
     <div>

@@ -27,6 +27,7 @@
 
   .btn:hover, #btn-flutuante:hover {
     background-color: #0d0d0e;
+    color: white;
   } 
   
   /* Estilos para o modal de imagem */

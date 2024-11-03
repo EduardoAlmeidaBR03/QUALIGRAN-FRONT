@@ -59,6 +59,29 @@ module.exports = class Services {
       });
    }
 
+   // Atualizar produto
+   static async ProdutoAtualizar(req, res) {
+      const idChapa = req.params.id_chapa;
+      let valores = req.body;
+      console.log("CHAPA ID PATUALIZAR: " + idChapa)
+
+      const options = {
+         url: endereco + 'chapas/update/' + idChapa,  
+         method: 'PUT',
+         data: valores
+      };
+
+      try {
+         await axios(options);
+         const mensagem = "Chapa atualizada com sucesso!";
+         res.render("mensagem", { mensagem });
+      } catch (error) {
+         console.error("Erro ao atualizar chapa:", error);
+         const mensagem = "Erro ao atualizar chapa!";
+         res.render("mensagem", { mensagem });
+      }
+   }
+
    // Deletar produto
    static async ProdutoDelete(req, res) {
       const idChapa = req.params.id; // Supondo que o ID da chapa venha pela URL
@@ -78,9 +101,24 @@ module.exports = class Services {
       }
    }
 
-   //COOKIES
-   static async CarrinhoAdicionar(req, res) {
+   // Buscar produto pelo ID
+   static async buscarChapaPeloId(idChapa) {
+      const options = {
+         url: endereco + 'chapas/' + idChapa, // A URL para buscar a chapa
+         method: 'GET'
+      };
 
+      try {
+         const response = await axios(options);
+         return response.data;
+      } catch (error) {
+         console.error("Erro ao buscar chapa pelo ID:", error);
+         return null;
+      }
+   }
+
+   // COOKIES
+   static async CarrinhoAdicionar(req, res) {
       const Item = {
          id_chapa: req.params.id_chapa,
          nome: req.params.nome,
@@ -90,7 +128,7 @@ module.exports = class Services {
       console.log("teste:  " + Item.id_chapa, Item.nome, Item.preco);
       try {
          let carrinho = req.cookies.carrinho ? JSON.parse(req.cookies.carrinho) : [];
-         
+
          // Verificar se o item já existe
          const existe = carrinho.find(item => item.id_chapa === Item.id_chapa);
          if (!existe) {
@@ -100,7 +138,7 @@ module.exports = class Services {
          } else {
             res.send('Item já existe no carrinho');
          }
-         
+
       } catch (error) {
          console.error("Erro ao adicionar item ao carrinho:", error);
          res.send('Erro ao adicionar item ao carrinho');
@@ -109,7 +147,7 @@ module.exports = class Services {
 
    static async CarrinhoRemoverItem(req, res) {
       const itemDeletar = req.params.id_chapa;
-      
+
       try {
          if (req.cookies.carrinho) {
             let carrinho = JSON.parse(req.cookies.carrinho);
@@ -125,14 +163,14 @@ module.exports = class Services {
       }
    }
 
-      // Listar itens do carrinho com o total dos valores
+   // Listar itens do carrinho com o total dos valores
    static async CarrinhoListar(req, res) {
       try {
          if (req.cookies.carrinho) {
             const carrinho = JSON.parse(req.cookies.carrinho);
-            
+
             // Calcular o total dos preços dos itens no carrinho
-         const total = carrinho.reduce((sum, item) => sum + (parseFloat(item.preco) || 0), 0);
+            const total = carrinho.reduce((sum, item) => sum + (parseFloat(item.preco) || 0), 0);
 
             // Renderizar a página do carrinho com os itens e o total
             res.render('carrinho/Listar', { carrinho, total });
@@ -144,6 +182,4 @@ module.exports = class Services {
          res.send('Erro ao listar carrinho');
       }
    }
-
-
-}
+};

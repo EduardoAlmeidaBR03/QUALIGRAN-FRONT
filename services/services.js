@@ -1,5 +1,5 @@
 const axios = require("axios");
-const endereco = "https://eduardoalmeidabr03.github.io/QUALIGRAN-BACK/";
+const endereco = "https://eloquent-trifle-1a63ce.netlify.app/";
 
 module.exports = class Services {
    // VERIFICAR USUÁRIO

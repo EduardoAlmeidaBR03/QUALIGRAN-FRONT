@@ -1,5 +1,5 @@
 const axios = require("axios");
-const endereco = "http://localhost:3000/";
+const endereco = "https://eduardoalmeidabr03.github.io/QUALIGRAN-BACK/";
 
 module.exports = class Services {
    // VERIFICAR USUÁRIO

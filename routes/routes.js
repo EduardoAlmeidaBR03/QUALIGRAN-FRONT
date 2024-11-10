@@ -13,6 +13,10 @@ router.post("/login",Services.UsuarioLogin);
 router.get('/login', (req, res) => {
     res.render('usuarios/login', { isInativa: true });
   });
+
+router.get('/logado', (req, res) => {
+   res.render('logado');
+});
   
 
 router.get("/usuarios/Cadastrar",(req, res) => {
@@ -36,11 +40,11 @@ router.get('/chapa/alterar/:id_chapa', async (req, res) => {
   console.log("ID para alterar" + req.params.id_chapa)
   try {
      const chapa = await Services.buscarChapaPeloId(idChapa);
-     console.log("CHAPA PARA ALTERAA::  " + chapa) // Certifique-se que isso retorna a chapa corretamente
+     console.log("CHAPA PARA ALTERAR::  " + chapa) // Certifique-se que isso retorna a chapa corretamente
      if (!chapa) {
         res.status(404).send("Chapa não encontrada");
      } else {
-        res.render('produtos/atualizar', { chapa });
+        res.render('produtos/atualizar', { chapa, isInativa: true });
      }
   } catch (error) {
      console.error("Erro ao buscar chapa:", error);

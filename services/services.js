@@ -1,5 +1,5 @@
 const axios = require("axios");
-const endereco = "https://eloquent-trifle-1a63ce.netlify.app/";
+const endereco = "http://localhost:3000/";
 
 module.exports = class Services {
    // VERIFICAR USUÁRIO
@@ -25,10 +25,15 @@ module.exports = class Services {
          method: 'POST',
          data: valores
       };
-      axios(options);
-      const mensagem = "Cadastro realizado com sucesso!";
-      res.render("mensagem", { mensagem });
+      
+      try {
+         await axios(options); // Aguarde a finalização da requisição
+         res.json({ mensagem: "Cadastro realizado com sucesso!" });
+      } catch (error) {
+         res.status(500).json({ mensagem: "Erro ao cadastrar o usuário." });
+      }
    }
+
 
    //////////////////////// PRODUTO
 
@@ -40,9 +45,12 @@ module.exports = class Services {
          method: 'POST',
          data: valores
       };
-      axios(options);
-      const mensagem = "Cadastro realizado com sucesso!";
-      res.render("mensagem", { mensagem });
+      try {
+         await axios(options); // Aguarde a finalização da requisição
+         res.json({ mensagem: "Cadastro realizado com sucesso!" });
+      } catch (error) {
+         res.status(500).json({ mensagem: "Erro ao cadastrar o material." });
+      }
    }
 
    // Listar produtos
@@ -63,7 +71,7 @@ module.exports = class Services {
    static async ProdutoAtualizar(req, res) {
       const idChapa = req.params.id_chapa;
       let valores = req.body;
-      console.log("CHAPA ID PATUALIZAR: " + idChapa)
+      console.log("CHAPA ID ATUALIZAR: " + idChapa)
 
       const options = {
          url: endereco + 'chapas/update/' + idChapa,  
@@ -92,14 +100,15 @@ module.exports = class Services {
 
       try {
          await axios(options);
-         const mensagem = "Chapa deletada com sucesso!";
-         res.render("mensagem", { mensagem });
+         // Redireciona para a página chapas/listar
+         res.redirect('/chapas/listar');
       } catch (error) {
          console.error("Erro ao deletar chapa:", error);
          const mensagem = "Erro ao deletar chapa!";
          res.render("mensagem", { mensagem });
       }
    }
+
 
    // Buscar produto pelo ID
    static async buscarChapaPeloId(idChapa) {

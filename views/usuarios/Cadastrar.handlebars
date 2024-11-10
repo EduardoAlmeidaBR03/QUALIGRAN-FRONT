@@ -1,5 +1,6 @@
 <head>
   <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -7,7 +8,7 @@
   <div class="container-login100">
     <div class="wrap-login100">
       <h1 class="text-center my-3">Cadastro de Usuários</h1>
-      <form action="/usuarios/Cadastrar" method="post">
+      <form method="post">
         <div class="row w-100 d-block m-auto g-3">
           <div class="col-12">
             <label class="form-label" for="nome">Nome:</label>
@@ -54,6 +55,29 @@
     </div>
   </div>
 </div>
-
 </body>
 
+{{!-- criação das mensagens popup --}}
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", async function(event) {
+        event.preventDefault(); // Previne o envio padrão
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        try {
+          const response = await axios.post("/usuarios/Cadastrar", data);
+          if (response.data.mensagem) {
+            alert(response.data.mensagem); // Exibe a mensagem em um popup
+            window.history.back();
+          }
+        } catch (error) {
+          console.error("Erro ao cadastrar:", error);
+          alert("Erro ao cadastrar o usuário.");
+        }
+      });
+    });
+  </script>

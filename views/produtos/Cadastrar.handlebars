@@ -1,5 +1,6 @@
 <head>
   <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -111,4 +112,30 @@
     const randomOption = options[Math.floor(Math.random() * options.length)];
     qualidadeSelect.value = randomOption; // Define o valor aleatório no select
   });
+
+  // Funcção para criar o popup
+  document.addEventListener("DOMContentLoaded", function() {
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", async function(event) {
+        event.preventDefault(); // Previne o envio padrão
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        try {
+          const response = await axios.post("/chapas/Cadastrar", data);
+          if (response.data.mensagem) {
+            alert(response.data.mensagem); // Exibe a mensagem em um popup
+            window.history.back();
+          }
+        } catch (error) {
+          console.error("Erro ao cadastrar:", error);
+          alert("Erro ao cadastrar o material.");
+        }
+      });
+    });
+
 </script>
+
+

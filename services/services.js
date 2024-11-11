@@ -25,7 +25,7 @@ module.exports = class Services {
          method: 'POST',
          data: valores
       };
-      
+
       try {
          await axios(options); // Aguarde a finalização da requisição
          res.json({ mensagem: "Cadastro realizado com sucesso!" });
@@ -74,7 +74,7 @@ module.exports = class Services {
       console.log("CHAPA ID ATUALIZAR: " + idChapa)
 
       const options = {
-         url: endereco + 'chapas/update/' + idChapa,  
+         url: endereco + 'chapas/update/' + idChapa,
          method: 'PUT',
          data: valores
       };
@@ -82,11 +82,11 @@ module.exports = class Services {
       try {
          await axios(options);
          const mensagem = "Chapa atualizada com sucesso!";
-         res.render("mensagem", { mensagem });
+         res.send('Chapa atualizada com sucesso!');
       } catch (error) {
          console.error("Erro ao atualizar chapa:", error);
          const mensagem = "Erro ao atualizar chapa!";
-         res.render("mensagem", { mensagem });
+         res.send('Erro ao atualizar chapa!')
       }
    }
 

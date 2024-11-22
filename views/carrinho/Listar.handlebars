@@ -52,14 +52,17 @@
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
 
-      // Cabeçalho com fundo verde e texto "QUALIGRAN"
-      doc.setFillColor(0, 128, 0); // Verde
-      doc.rect(0, 0, 210, 30, "F"); // Retângulo preenchido
-      doc.setTextColor(0, 0, 0); // Preto
-      doc.setFontSize(20);
-      doc.text("QUALIGRAN", 105, 20, null, null, "center");
-
+      // Carrega a imagem como base64
+      const imgData = await loadImageAsBase64('../img/calacata.jpg'); // Substitua pelo caminho ou URL da imagem
       
+      // Adiciona o cabeçalho com a imagem
+      doc.addImage(imgData, 'JPEG', 0, 0, 210, 30); // Ajuste largura e altura conforme necessário
+
+      // Texto sobreposto à imagem
+      doc.setTextColor(0, 0, 0);
+      doc.setFont("helvetica", "bold"); // Texto branco para contraste com a imagem
+      doc.setFontSize(30);
+      doc.text("QUALIGRAN", 105, 20, null, null, "center");
 
       let y = 40; // Posição inicial no eixo Y
 
@@ -72,8 +75,9 @@
         doc.setFontSize(12);
         doc.text("Código Produto: {{this.id_chapa}}", 10, y);
         doc.text("Nome: {{this.nome}}", 10, y + 10);
+        //const imgChapa = await loadImageAsBase64('{{this.link}}');
+        //doc.addImage(imgChapa, 'JPG', 0, 0, 30, 30);
         doc.text("Preço: R$ {{this.preco}}", 10, y + 20);
-        //doc.addImage("{{this.link}}")
         y += 40;
 
         // Verifica se precisa de nova página
@@ -82,12 +86,11 @@
           y = 20;
 
           // Reaplica o cabeçalho na nova página
-          doc.setFillColor(0, 128, 0); // Verde
-          doc.rect(0, 0, 210, 30, "F");
-          doc.setTextColor(0, 0, 0); // Preto
+          doc.addImage(imgData, 'JPEG', 0, 0, 210, 30);
+          doc.setTextColor(255, 255, 255); // Texto branco
           doc.setFontSize(20);
           doc.text("QUALIGRAN", 105, 20, null, null, "center");
-          y = 40; // Ajusta posição após o cabeçalho
+          y = 40;
         }
       {{/each}}
 
@@ -97,6 +100,18 @@
 
       // Gera e baixa o PDF
       doc.save("PEDIDO_QUALIGRAN.pdf");
+    }
+
+    // Função para converter a imagem para base64
+    async function loadImageAsBase64(url) {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result); // Retorna o base64
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
     }
   </script>
 </body>

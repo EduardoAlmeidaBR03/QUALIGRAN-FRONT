@@ -1,30 +1,103 @@
-<h1 class="text-center my-3">Lista de Produtos do Carrinho</h1>
-<center>
-  <table class="table">
-    <div class="row">
-      <div class="col-12">
-        <thead>
-        </thead>
-        <tbody>
-          {{#each carrinho}}
-            <tr>
-              <td>
-                <img src="{{this.link}}" alt="Imagem do produto" width="50" height="50" class="me-2"/>
-                Código Produto: <strong>{{this.id_chapa}}</strong> - 
-                <strong>{{this.nome}}</strong> - 
-                Preço: <strong>R$ {{this.preco}}</strong>
-              </td>
-              <td>
-                <a href="/carrinho/remover/{{this.id_chapa}}" title="Clique aqui para remover do carrinho">
-                  <i class="bi bi-cart-x"></i>
-                </a>
-              </td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </div>
-    </div>
-  </table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Produtos do Carrinho</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center my-3">Lista de Produtos do Carrinho</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Detalhes do Produto</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each carrinho}}
+          <tr>
+            <td>
+              <img src="{{this.link}}" alt="Imagem do produto" width="50" height="50" class="me-2"/>
+              Código Produto: <strong>{{this.id_chapa}}</strong> - 
+              <strong>{{this.nome}}</strong> - 
+              Preço: <strong>R$ {{this.preco}}</strong>
+            </td>
+            <td>
+              <a href="/carrinho/remover/{{this.id_chapa}}" title="Clique aqui para remover do carrinho">
+                <i class="bi bi-cart-x"></i>
+              </a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
 
-  <h3 class="text-center my-3">Total: R$ {{total}}</h3>
-</center>
+    <h3 class="text-center my-3">Total: R$ {{total}}</h3>
+  </div>
+
+  <!-- Botão centralizado no final da página -->
+  <div class="row justify-content-center fixed-bottom mb-3">
+    <div class="col-auto">
+      <button class="btn btn-primary" onclick="gerarRelatorioPDF()">Gerar Relatório em PDF</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    async function gerarRelatorioPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Cabeçalho com fundo verde e texto "QUALIGRAN"
+      doc.setFillColor(0, 128, 0); // Verde
+      doc.rect(0, 0, 210, 30, "F"); // Retângulo preenchido
+      doc.setTextColor(0, 0, 0); // Preto
+      doc.setFontSize(20);
+      doc.text("QUALIGRAN", 105, 20, null, null, "center");
+
+      
+
+      let y = 40; // Posição inicial no eixo Y
+
+      // Adiciona cada produto no PDF
+      {{#each carrinho}}
+        // Separa visualmente os produtos
+        doc.setDrawColor(0, 0, 0); // Preto
+        doc.line(10, y - 5, 200, y - 5); // Linha horizontal de separação
+        
+        doc.setFontSize(12);
+        doc.text("Código Produto: {{this.id_chapa}}", 10, y);
+        doc.text("Nome: {{this.nome}}", 10, y + 10);
+        doc.text("Preço: R$ {{this.preco}}", 10, y + 20);
+        //doc.addImage("{{this.link}}")
+        y += 40;
+
+        // Verifica se precisa de nova página
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+
+          // Reaplica o cabeçalho na nova página
+          doc.setFillColor(0, 128, 0); // Verde
+          doc.rect(0, 0, 210, 30, "F");
+          doc.setTextColor(0, 0, 0); // Preto
+          doc.setFontSize(20);
+          doc.text("QUALIGRAN", 105, 20, null, null, "center");
+          y = 40; // Ajusta posição após o cabeçalho
+        }
+      {{/each}}
+
+      // Adiciona o total no PDF
+      doc.setFontSize(14);
+      doc.text("Total: R$ {{total}}", 10, y + 10);
+
+      // Gera e baixa o PDF
+      doc.save("PEDIDO_QUALIGRAN.pdf");
+    }
+  </script>
+</body>
+</html>

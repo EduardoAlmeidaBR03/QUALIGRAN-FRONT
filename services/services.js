@@ -82,7 +82,8 @@ module.exports = class Services {
       try {
          await axios(options);
          const mensagem = "Chapa atualizada com sucesso!";
-         res.send('Chapa atualizada com sucesso!');
+         res.redirect('/chapas/listar');
+         // res.send('Chapa atualizada com sucesso!');
       } catch (error) {
          console.error("Erro ao atualizar chapa:", error);
          const mensagem = "Erro ao atualizar chapa!";
@@ -143,7 +144,8 @@ module.exports = class Services {
          if (!existe) {
             carrinho.push(Item);
             res.cookie('carrinho', JSON.stringify(carrinho), { maxAge: 9000000, httpOnly: true });
-            res.send('Item adicionado ao carrinho');
+            res.redirect('/chapas/listar');
+            // res.send('Item adicionado ao carrinho');
          } else {
             res.send('Item já existe no carrinho');
          }
@@ -162,7 +164,8 @@ module.exports = class Services {
             let carrinho = JSON.parse(req.cookies.carrinho);
             carrinho = carrinho.filter(item => item.id_chapa !== itemDeletar);
             res.cookie('carrinho', JSON.stringify(carrinho), { maxAge: 9000000, httpOnly: true });
-            res.send('Item removido do carrinho');
+            res.redirect('/chapas/listar');
+            //res.send('Item removido do carrinho');
          } else {
             res.send('Carrinho vazio');
          }
@@ -170,6 +173,7 @@ module.exports = class Services {
          console.error("Erro ao remover item do carrinho:", error);
          res.send('Erro ao remover item do carrinho');
       }
+      
    }
 
    // Listar itens do carrinho com o total dos valores

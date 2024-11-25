@@ -24,6 +24,7 @@
               <img src="{{this.link}}" alt="Imagem do produto" width="50" height="50" class="me-2"/>
               Código Produto: <strong>{{this.id_chapa}}</strong> - 
               <strong>{{this.nome}}</strong> - 
+              Dimensão(m): <strong>{{this.largura}} x {{this.altura}} </strong> -
               Preço: <strong>R$ {{this.preco}}</strong>
             </td>
             <td>
@@ -74,7 +75,8 @@
       doc.setFontSize(12);
       doc.text(`Código do Produto: {{this.id_chapa}}`, 10, y);
       doc.text(`Nome: {{this.nome}}`, 10, y + 10);
-      doc.text(`Preço: R$ {{this.preco}}`, 10, y + 20);
+      doc.text(`Dimensão M: {{this.largura}} x {{this.altura}}`, 10, y + 20);
+      doc.text(`Preço: R$ {{this.preco}}`, 10, y + 30);
       y += 40;
 
       // Verificar se precisa de nova página

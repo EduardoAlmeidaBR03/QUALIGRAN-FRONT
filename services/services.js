@@ -133,7 +133,9 @@ module.exports = class Services {
          id_chapa: req.params.id_chapa,
          nome: req.params.nome,
          preco: req.params.preco,
-         link: decodeURIComponent(req.params.link)
+         link: decodeURIComponent(req.params.link),
+         largura: req.params.largura,
+         altura: req.params.altura
       };
       console.log("teste:  " + Item.id_chapa, Item.nome, Item.preco);
       try {
